@@ -6,7 +6,14 @@
 4. Restart
 5. Run from `program.sh/install_python` to `program.sh/install_scala`
 6. Run from `cli.sh/install_ohmyzsh` to `cli.sh/install_warp`
-7. Run `yadm apply`
+
+# Obsidian
+
+```sh
+mkdir -p ~/Workspace
+cd ~/Workspace
+git clone https://github.com/congnghiahieu/obsidian
+```
 
 # GUI Applications
 
