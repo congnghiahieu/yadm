@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local act = wezterm.action
 
 -- Color scheme
 config.color_scheme = "OneDark (base16)"
@@ -45,7 +44,7 @@ config.initial_rows = 36
 -- Window frame
 config.window_frame = {
 	font = wezterm.font({ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Bold" }),
-	font_size = 11,
+	font_size = 10,
 	active_titlebar_bg = "#333333",
 	inactive_titlebar_bg = "#333333",
 }
