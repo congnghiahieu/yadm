@@ -60,6 +60,14 @@ return {
 						filter = {
 							event = "msg_show",
 							kind = "",
+							find = "clipboard",
+						},
+						opts = { skip = true },
+					},
+					{
+						filter = {
+							event = "msg_show",
+							kind = "",
 							find = "change",
 						},
 						opts = { skip = true },

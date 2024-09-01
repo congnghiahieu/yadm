@@ -11,7 +11,7 @@ fi
 
 function install_essentials {
   sudo apt update -y
-  sudo apt install coreutils build-essential curl wget git unzip vim tree locate at stow nmap wl-clipboard xclip -y
+  sudo apt install coreutils build-essential curl wget git unzip vim tree locate at stow nmap -y
   sudo dpkg --configure -a
 }
 install_essentials
@@ -23,27 +23,27 @@ function install_pipx {
     source /etc/lsb-release
 
     if [ -z $DISTRIB_RELEASE ] || [ -z $DISTRIB_ID ]; then
-        echo "DISTRIB_RELEASE and DISTRIB_ID are not set"
+      echo "DISTRIB_RELEASE and DISTRIB_ID are not set"
     else
-        if [ $DISTRIB_ID == "Ubuntu" ]; then
-            IFS='.' read -r -a distro_vers <<< $DISTRIB_RELEASE
-            major_ver=${distro_vers[0]}
-            echo "Distro major version $major_ver"
-            if [ -z $major_ver ]; then
-                echo "Major release version parsing failed"
-            else
-                if [ $(($major_ver)) -le 22 ]; then
-                    python3 -m pip install --user pipx
-                    python3 -m pipx ensurepath
-                else
-                    sudo apt update -y
-                    sudo apt install pipx -y
-                    pipx ensurepath
-                fi
-            fi
+      if [ $DISTRIB_ID == "Ubuntu" ]; then
+        IFS='.' read -r -a distro_vers <<<$DISTRIB_RELEASE
+        major_ver=${distro_vers[0]}
+        echo "Distro major version $major_ver"
+        if [ -z $major_ver ]; then
+          echo "Major release version parsing failed"
         else
-            echo "It is not ubuntu linux"
+          if [ $(($major_ver)) -le 22 ]; then
+            python3 -m pip install --user pipx
+            python3 -m pipx ensurepath
+          else
+            sudo apt update -y
+            sudo apt install pipx -y
+            pipx ensurepath
+          fi
         fi
+      else
+        echo "It is not ubuntu linux"
+      fi
     fi
   fi
 }
