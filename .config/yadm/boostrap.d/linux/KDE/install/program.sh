@@ -11,7 +11,7 @@ fi
 
 function install_essentials {
   sudo apt update -y
-  sudo apt install coreutils build-essential curl wget git vim tree locate at stow nmap netcat -y
+  sudo apt install coreutils build-essential curl wget git vim tree locate at stow nmap netcat wl-clipboard xclip -y
 }
 install_essentials
 

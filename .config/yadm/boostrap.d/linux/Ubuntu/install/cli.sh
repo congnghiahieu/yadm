@@ -19,6 +19,10 @@ function install_ibusbamboo {
 }
 install_ibusbamboo
 
+function install_yadm {
+  sudo apt install yadm -y
+}
+
 function install_docker {
   # Uninstall all conflicting packages
   for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -52,6 +56,14 @@ function install_zsh {
   chsh -s $(which zsh)
 }
 install_zsh
+
+function install_wezterm {
+  curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+  sudo apt update -y
+  sudo apt install wezterm -y
+}
+install_wezterm
 
 function install_ohmyzsh {
   if ! command -v zsh &>/dev/null; then
@@ -125,7 +137,6 @@ function install_tmux {
 }
 
 function install_tmuxp {
-  pipx install tmuxp
 }
 install_tmuxp
 
@@ -136,9 +147,8 @@ function install_fzf {
 install_fzf
 
 function install_fd {
-  cd /tmp
-  curl -LO https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-musl_10.2.0_amd64.deb
-  sudo dpkg -i ./fd-musl_10.2.0_amd64.deb
+  sudo apt install fd-find -y
+  ln -s $(which fdfind) ~/.local/bin/fd
 }
 install_fd
 
@@ -155,15 +165,17 @@ function install_gdu {
 install_gdu
 
 function install_tldr {
-  pipx install tldr
 }
 install_tldr
 
-function install_ansible {
+function install_pipx_utils {
   pipx install --include-deps ansible
   pipx inject --include-apps ansible argcomplete
+  pipx install tldr
+  pipx install tmuxp
+  pipx install ranger-fm
 }
-install_ansible
+install_pipx_utils
 
 function install_lazygit {
   go install github.com/jesseduffield/lazygit@latest
@@ -188,7 +200,3 @@ function install_warp {
   sudo apt-get update -y && sudo apt-get install cloudflare-warp -y
 }
 install_warp
-
-function install_yadm {
-  sudo apt install yadm -y
-}

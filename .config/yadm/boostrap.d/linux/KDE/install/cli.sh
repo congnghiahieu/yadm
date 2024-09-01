@@ -137,8 +137,8 @@ function install_fzf {
 install_fzf
 
 function install_fd {
-  curl -LO https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-musl_10.2.0_amd64.deb
-  sudo dpkg -i ./fd-musl_10.2.0_amd64.deb
+  sudo apt install fd-find -y
+  ln -s $(which fdfind) ~/.local/bin/fd
 }
 install_fd
 
