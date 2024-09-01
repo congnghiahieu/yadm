@@ -9,42 +9,6 @@ elif [[ $CURRENT_SHELL == *fish* ]]; then
   SHELL_FILE="$HOME/.config/fish/config.fish"
 fi
 
-function install_ibusbamboo {
-  sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo
-  sudo apt-get update -y
-  sudo apt-get install ibus ibus-bamboo --install-recommends
-  ibus restart
-  # Đặt ibus-bamboo làm bộ gõ mặc định
-  env DCONF_PROFILE=ibus dconf write /desktop/ibus/general/preload-engines "['BambooUs', 'Bamboo']" && gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
-}
-install_ibusbamboo
-
-function install_docker {
-  # Uninstall all conflicting packages
-  for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
-
-  # Add Docker's official GPG key:
-  sudo apt-get update -y
-  sudo apt-get install ca-certificates curl -y
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-  # Add the repository to Apt sources:
-  echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-    sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
-  sudo apt-get update -y
-
-  # Install docker
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-
-  sudo groupadd docker
-  sudo usermod -aG docker $USER
-}
-install_docker
-
 function install_zsh {
   sudo apt update -y
   sudo apt install zsh -y
@@ -106,10 +70,9 @@ install_zoxide
 function install_btop {
   cd /tmp
   curl -LO https://github.com/aristocratos/btop/releases/download/v1.3.2/btop-x86_64-linux-musl.tbz
-  sudo mkdir -p /usr/local/bin
   tar -xvjf /tmp/btop-x86_64-linux-musl.tbz
   cd /tmp/btop
-  sudo make install PREFIX=/usr/local/bin
+  sudo make install PREFIX=/usr/local
 }
 install_btop
 
@@ -124,11 +87,6 @@ function install_tmux {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
-function install_tmuxp {
-  pipx install tmuxp
-}
-install_tmuxp
-
 function install_fzf {
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
@@ -142,6 +100,7 @@ function install_fd {
 install_fd
 
 function install_rg {
+  cd /tmp
   curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
   sudo dpkg -i ./ripgrep_14.1.0-1_amd64.deb
 }
@@ -152,15 +111,14 @@ function install_gdu {
 }
 install_gdu
 
-function install_tldr {
+function install_pipx_utils {
+  pipx install --include-deps ansible
+  pipx inject --include-apps ansible argcomplete
   pipx install tldr
+  pipx install tmuxp
+  pipx install ranger-fm
 }
-install_tldr
-
-function install_ansible {
-  pipx install ansible
-}
-install_ansible
+install_pipx_utils
 
 function install_lazygit {
   go install github.com/jesseduffield/lazygit@latest
@@ -176,17 +134,5 @@ function install_nvim {
   cd /tmp
   curl -LO https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz
   sudo tar -C /usr/local -xzvf /tmp/nvim-linux64.tar.gz
-  source $SHELL_FILE
 }
 install_nvim
-
-function install_chezmoi {
-  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
-}
-
-function install_warp {
-  curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-  echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
-  sudo apt-get update && sudo apt-get install cloudflare-warp
-}
-install_warp

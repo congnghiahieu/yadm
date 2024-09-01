@@ -112,7 +112,6 @@ install_bat
 
 function install_zoxide {
   curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-  source $SHELL_FILE
 }
 install_zoxide
 
@@ -135,10 +134,6 @@ function install_tmux {
   mkdir -p ~/.tmux/plugins
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
-
-function install_tmuxp {
-}
-install_tmuxp
 
 function install_fzf {
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -163,10 +158,6 @@ function install_gdu {
   go install github.com/dundee/gdu/v5/cmd/gdu@latest
 }
 install_gdu
-
-function install_tldr {
-}
-install_tldr
 
 function install_pipx_utils {
   pipx install --include-deps ansible

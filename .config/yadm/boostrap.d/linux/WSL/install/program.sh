@@ -16,23 +16,42 @@ function install_essentials {
 }
 install_essentials
 
-function install_flatpak {
-  sudo apt install flatpak -y
-  sudo apt install gnome-software-plugin-flatpak -y
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+function install_pipx {
+  if command -v pipx &>/dev/null; then
+    echo "Pipx is already installed"
+  else
+    source /etc/lsb-release
+
+    if [ -z $DISTRIB_RELEASE ] || [ -z $DISTRIB_ID ]; then
+        echo "DISTRIB_RELEASE and DISTRIB_ID are not set"
+    else
+        if [ $DISTRIB_ID == "Ubuntu" ]; then
+            IFS='.' read -r -a distro_vers <<< $DISTRIB_RELEASE
+            major_ver=${distro_vers[0]}
+            echo "Distro major version $major_ver"
+            if [ -z $major_ver ]; then
+                echo "Major release version parsing failed"
+            else
+                if [ $(($major_ver)) -le 22 ]; then
+                    python3 -m pip install --user pipx
+                    python3 -m pipx ensurepath
+                else
+                    sudo apt update -y
+                    sudo apt install pipx -y
+                    pipx ensurepath
+                fi
+            fi
+        else
+            echo "It is not ubuntu linux"
+        fi
+    fi
+  fi
 }
-install_flatpak
 
 function install_python {
   sudo apt update -y
   sudo apt install python3 python3-pip python3-venv -y
-
-  if command -v pipx &>/dev/null; then
-    echo "Pipx is already installed"
-  else
-    python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
-  fi
+  install_pipx
 }
 install_python
 
