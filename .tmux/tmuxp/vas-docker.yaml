@@ -1,0 +1,12 @@
+session_name: vas-docker
+start_directory: /home/hieucien/Workspace/python/vas-docker/
+windows:
+  - window_name: vas-docker
+    focus: true
+    panes:
+      - nv .
+  - window_name: term
+    window_index: 0
+    layout: tiled
+    panes:
+      - null

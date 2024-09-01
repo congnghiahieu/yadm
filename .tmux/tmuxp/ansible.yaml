@@ -1,0 +1,12 @@
+session_name: ansible
+start_directory: ~/Workspace/ansible
+windows:
+  - window_name: ansible
+    focus: true
+    panes:
+      - nv .
+  - window_name: term
+    window_index: 0
+    layout: tiled
+    panes:
+      - null

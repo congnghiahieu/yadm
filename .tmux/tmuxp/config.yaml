@@ -1,0 +1,22 @@
+session_name: config
+start_directory: /home/hieucien/
+windows:
+  - window_name: profile
+    start_directory: ./
+    panes:
+      - nv .zshrc
+  - window_name: nvim-conf
+    start_directory: /home/hieucien/.config/nvim
+    focus: true
+    panes:
+      - shell_command:
+          - cmd: nv init.lua
+  - window_name: tmux-conf
+    start_directory: evolution
+    panes:
+      - shell_command:
+          - cmd: nv .tmux.conf
+  - window_name: term
+    window_index: 0
+    panes:
+      - null

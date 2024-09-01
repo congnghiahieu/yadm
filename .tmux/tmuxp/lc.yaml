@@ -1,0 +1,12 @@
+session_name: lc
+start_directory: ~/Workspace/leetcode
+windows:
+  - window_name: leetcode
+    focus: true
+    panes:
+      - nv .
+  - window_name: term
+    window_index: 0
+    layout: tiled
+    panes:
+      - null

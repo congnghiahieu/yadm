@@ -1,0 +1,43 @@
+session_name: vas
+start_directory: /home/hieucien/Workspace/python/vas
+windows:
+  - window_name: client
+    start_directory: client
+    focus: true
+    panes:
+      - nv src/main.tsx
+  - window_name: server
+    start_directory: server
+    panes:
+      - shell_command:
+          - cmd: source venv/bin/activate
+          - cmd: nv app.py
+  - window_name: deps
+    start_directory: server
+    panes:
+      - shell_command:
+          - cmd: source venv/bin/activate
+          - cmd: cd ../deps
+          - cmd: nv .
+  - window_name: docs
+    start_directory: docs
+    panes:
+      - nv .
+  - window_name: btop
+    panes:
+      - btop
+  - window_name: term
+    window_index: 0
+    layout: tiled
+    panes:
+      - null
+      - shell_command:
+          - cmd: cd client
+          - cmd: npm run dev
+            enter: false
+      - shell_command:
+          - cmd: cd server
+          - cmd: source venv/bin/activate
+          - cmd: python3 app.py
+            enter: false
+        focus: true

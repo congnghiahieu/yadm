@@ -1,0 +1,35 @@
+session_name: se
+start_directory: /home/hieucien/Workspace/python/schemathesis-evolution
+windows:
+  - window_name: client
+    start_directory: client
+    focus: true
+    panes:
+      - nv src/main.tsx
+  - window_name: server
+    start_directory: evolution
+    panes:
+      - shell_command:
+          - cmd: source venv/bin/activate
+          - cmd: nv app.py
+  - window_name: lib
+    start_directory: evolution
+    panes:
+      - shell_command:
+          - cmd: source venv/bin/activate
+          - cmd: cd ../
+          - cmd: nv .
+  - window_name: term
+    layout: tiled
+    panes:
+      - shell_command:
+          - cmd: cd client
+          - cmd: npm run dev
+            enter: false
+      - null
+      - shell_command:
+          - cmd: cd evolution
+          - cmd: source ./venv/bin/activate
+          - cmd: python3 app.py
+            enter: false
+        focus: true
