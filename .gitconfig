@@ -3,3 +3,5 @@
 [user]
 	name = congnghiahieu
 	email = 2102540@vnu.edu.vn
+[core]
+	fscache = true

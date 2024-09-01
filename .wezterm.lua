@@ -50,4 +50,7 @@ config.window_frame = {
 	inactive_titlebar_bg = "#333333",
 }
 
+-- Audio bell
+config.audible_bell = "Disabled"
+
 return config
