@@ -23,6 +23,7 @@ function install_yadm {
   sudo apt update -y
   sudo apt install yadm -y
 }
+install_yadm
 
 function install_docker {
   # Uninstall all conflicting packages
@@ -66,7 +67,7 @@ function install_wezterm {
 }
 install_wezterm
 
-exit 0;
+exit 0
 
 function install_ohmyzsh {
   if ! command -v zsh &>/dev/null; then
@@ -138,6 +139,7 @@ function install_tmux {
   mkdir -p ~/.tmux/plugins
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
+install_tmux
 
 function install_fzf {
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
