@@ -66,6 +66,8 @@ function install_wezterm {
 }
 install_wezterm
 
+exit 0;
+
 function install_ohmyzsh {
   if ! command -v zsh &>/dev/null; then
     echo "Zsh is not installed"
