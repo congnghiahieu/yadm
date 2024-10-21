@@ -68,6 +68,16 @@ function install_node {
 }
 install_node
 
+function install_deno {
+  sudo apt update -y
+  if command -v deno &>/dev/null; then
+    echo "Deno $(deno --version) is already installed"
+  else
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
+}
+install_deno
+
 function install_dotnet {
   sudo apt remove dotnet* aspnetcore* netstandard* -y
   sudo mkdir -p /etc/apt/preferences.d
