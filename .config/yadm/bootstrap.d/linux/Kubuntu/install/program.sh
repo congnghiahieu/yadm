@@ -12,7 +12,6 @@ fi
 function install_essentials {
   sudo apt update -y
   sudo apt install coreutils build-essential curl wget git unzip vim tree locate at stow nmap wl-clipboard xclip -y
-  sudo dpkg --configure -a
 }
 install_essentials
 
@@ -42,6 +41,16 @@ function install_node {
   fi
 }
 install_node
+
+function install_deno {
+  sudo apt update -y
+  if command -v deno &>/dev/null; then
+    echo "Deno $(deno --version) is already installed"
+  else
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
+}
+install_deno
 
 function install_dotnet {
   sudo apt remove dotnet* aspnetcore* netstandard* -y

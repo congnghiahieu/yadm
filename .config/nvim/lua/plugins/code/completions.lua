@@ -15,7 +15,7 @@ return {
 		"onsails/lspkind.nvim",
 
 		-- Github copilot
-		"github/copilot.vim",
+		-- "github/copilot.vim",
 
 		-- Codeium
 		-- {

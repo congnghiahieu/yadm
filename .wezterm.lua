@@ -2,11 +2,13 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Color scheme
+-- config.color_scheme = "Ayu Mirage"
 config.color_scheme = "OneDark (base16)"
 
 -- Font
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
 config.line_height = 1.0
+config.font_size = 11
 
 -- Tab bar
 config.use_fancy_tab_bar = true
@@ -25,7 +27,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
-	bottom = 0,
+	bottom = 2,
 }
 
 -- Scroll bar

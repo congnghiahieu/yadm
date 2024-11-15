@@ -23,10 +23,10 @@ git clone https://github.com/congnghiahieu/obsidian
 - VSCode
 - Obsidian
 - WPS
-- Vivaldi
+- Edge
 - Teamviewer
+- AnyDesk
 - JetBrain, JetBrain Nerd Font
-- ibus bamboo
 
 ## Optional
 

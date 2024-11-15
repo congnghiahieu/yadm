@@ -10,8 +10,8 @@ return {
 
 			wk.add({
 				{ "<space>f", group = "Misc" },
-				{ "<space>fC", "<cmd>Copilot disable<CR>", desc = "Disable copilot" },
-				{ "<space>fc", "<cmd>Copilot enable<CR>", desc = "Enable copilot" },
+				-- { "<space>fC", "<cmd>Copilot disable<CR>", desc = "Disable copilot" },
+				-- { "<space>fc", "<cmd>Copilot enable<CR>", desc = "Enable copilot" },
 				{ "<space>fy", "<cmd>%y<CR>", desc = "Yank file content" },
 				{ "<space>fd", "<cmd>%d<CR>", desc = "Delete file content" },
 				{ "<space>fv", "ggVG", desc = "Visual file content" },

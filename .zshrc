@@ -110,7 +110,6 @@ alias gsq='git squash'
 alias grl='git reflog'
 alias gsm='git submodule'
 alias gcf='git config'
-alias gk='gitk --all'
 
 # Alias for docker
 alias db='docker build'
@@ -193,7 +192,7 @@ fi
 export ANDROID_HOME=~/Android/Sdk
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 
-export PATH=/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:${PATH}:$JAVA_HOME/bin
+export PATH=/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:${PATH}:$JAVA_HOME/bin:/usr/local/protobuf/bin
 export MANPATH=${MANPATH}:/usr/local/man
 export FPATH=${FPATH}:~/.zfunc
 
@@ -249,3 +248,8 @@ if command -v ansible &>/dev/null; then
 	eval $(register-python-argcomplete ansible-pull)
 	eval $(register-python-argcomplete ansible-vault)
 fi
+
+# Path for texlive
+export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
+export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"

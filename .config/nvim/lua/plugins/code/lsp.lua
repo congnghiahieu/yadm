@@ -32,7 +32,7 @@ return {
 					"pyright",
 
 					-- JS / TS
-					"tsserver",
+					"ts_ls",
 					-- "tailwindcss",
 					-- "cssls",
 					-- "prismals",
@@ -103,7 +103,7 @@ return {
 			})
 
 			-- JS / TS
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 				settings = {
 					typescript = {
