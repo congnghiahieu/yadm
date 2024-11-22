@@ -6,7 +6,8 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = "dracula",
+				-- theme = "dracula",
+				theme = "ayu",
 			},
 			sections = {
 				lualine_x = {

@@ -2,8 +2,8 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Color scheme
--- config.color_scheme = "Ayu Mirage"
-config.color_scheme = "OneDark (base16)"
+config.color_scheme = "Ayu Mirage"
+-- config.color_scheme = "OneDark (base16)"
 
 -- Font
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
@@ -11,10 +11,10 @@ config.line_height = 1.0
 config.font_size = 11
 
 -- Tab bar
-config.use_fancy_tab_bar = true
 config.enable_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
 config.colors = {
 	tab_bar = {
 		-- The color of the inactive tab bar edge/divider
@@ -27,7 +27,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
-	bottom = 2,
+	bottom = 0
 }
 
 -- Scroll bar
@@ -53,5 +53,13 @@ config.window_frame = {
 
 -- Audio bell
 config.audible_bell = "Disabled"
+
+-- Keymap
+config.keys = {
+  {
+    key = 'F11',
+    action = wezterm.action.ToggleFullScreen,
+  },
+}
 
 return config

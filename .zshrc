@@ -1,5 +1,3 @@
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/hieucien/completions:"* ]]; then export FPATH="/home/hieucien/completions:$FPATH"; fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -14,9 +12,9 @@ ZSH_THEME="neo"
 # Ctrl + w: delete single word
 # Ctrl + p: previous command in history
 # Ctrl + n: next command in history
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+# bindkey -e
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-forward
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -46,7 +44,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
 
 # History
 HISTSIZE=16192
@@ -158,6 +156,7 @@ alias p='nvim ~/.zshrc'
 alias sp='. ~/.zshrc'
 alias nv='nvim'
 
+
 # Alias for ansible
 alias a='ansible'
 alias acf='ansible-config'
@@ -172,7 +171,7 @@ alias apl='ansible-pull'
 alias warp-con='warp-cli connect'
 alias warp-dis='warp-cli disconnect'
 
-# Modern command line tools
+# Modern CLI tools
 alias l='eza --long --classify --color auto --color-scale size --color-scale-mode gradient --icons --sort name --group --time modified --no-git --time-style "+%Y-%m-%d %H:%M"'
 alias ld='l --only-dirs'
 alias lf='l --only-files'
@@ -181,13 +180,6 @@ alias lad='la --only-dirs'
 alias laf='la --only-files'
 alias lzg='lazygit'
 alias lzd='lazydocker'
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION || ! $(command -v nvim) ]]; then
-	export EDITOR='vi'
-else
-	export EDITOR='nvim'
-fi
 
 export ANDROID_HOME=~/Android/Sdk
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
@@ -217,11 +209,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
+# Path for texlive
+export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
+export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
+
 # Deno
 if [ -d "$HOME/.deno" ]; then
-. "/home/hieucien/.deno/env"
+  source "/home/hieucien/.deno/env"
 fi
 
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/hieucien/completions:"* ]]; then
+  export FPATH="/home/hieucien/completions:$FPATH";
+fi
 
 if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init zsh)"
@@ -236,6 +237,21 @@ if command -v pipx &>/dev/null; then
 	eval "$(register-python-argcomplete pipx)"
 fi
 
+if command -v nvim &>/dev/null; then
+	export EDITOR='nvim'
+else
+	export EDITOR='vi'
+fi
+
+# Setting for zsh-vim-mode
+
+if command -v nvim &>/dev/null; then
+	export ZVM_VI_EDITOR='nvim'
+else
+  export ZVM_VI_EDITOR='vi'
+fi
+export ZVM_VI_SURROUND_BINDKEY='classic'
+
 # Completion for ansible
 if command -v ansible &>/dev/null; then
 	eval $(register-python-argcomplete ansible)
@@ -249,7 +265,3 @@ if command -v ansible &>/dev/null; then
 	eval $(register-python-argcomplete ansible-vault)
 fi
 
-# Path for texlive
-export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
-export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
-export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
