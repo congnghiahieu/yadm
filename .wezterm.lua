@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+-- config.default_prog = { "tmux" }
+
 -- Color scheme
 config.color_scheme = "Ayu Mirage"
 -- config.color_scheme = "OneDark (base16)"
@@ -27,7 +29,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
-	bottom = 0
+	bottom = 0,
 }
 
 -- Scroll bar
@@ -40,8 +42,8 @@ config.inactive_pane_hsb = {
 }
 
 -- Width, height
-config.initial_cols = 100
-config.initial_rows = 36
+config.initial_cols = 112
+config.initial_rows = 40
 
 -- Window frame
 config.window_frame = {
@@ -56,10 +58,10 @@ config.audible_bell = "Disabled"
 
 -- Keymap
 config.keys = {
-  {
-    key = 'F11',
-    action = wezterm.action.ToggleFullScreen,
-  },
+	{
+		key = "F11",
+		action = wezterm.action.ToggleFullScreen,
+	},
 }
 
 return config
