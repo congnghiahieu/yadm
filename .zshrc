@@ -1,5 +1,37 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export TMUXP_CONFIGDIR="~/.tmux/tmuxp"
+
+export ANDROID_HOME=~/Android/Sdk
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+
+export PATH=/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:${PATH}:$JAVA_HOME/bin:/usr/local/protobuf/bin
+export MANPATH=${MANPATH}:/usr/local/man
+export FPATH=${FPATH}:~/.zfunc
+
+# FZF options
+export FZF_COMPLETION_TRIGGER='**'
+# export FZF_DEFAULT_COMMAND='fd --hidden --ignore-case --absolute-path --follow --full-path --exclude .git --exclude node_modules --exclude .venv --exclude venv'
+export FZF_DEFAULT_COMMAND='fd --hidden --ignore-case --exclude .git --exclude node_modules --exclude .venv --exclude venv . .'
+export FZF_DEFAULT_OPTS='--cycle --keep-right --scroll-off 20 --height ~100% --layout reverse --border rounded --border-label-pos top --info inline-right --marker "m"'
+# Find files with Ctrl-R
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type file"
+export FZF_CTRL_T_OPTS="--border-label 'Find files' --preview 'bat --color=always --style=numbers --line-range=:1000 {}' --preview-label 'Preview'"
+# Change directory with Ctrl-O
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type directory"
+export FZF_ALT_C_OPTS="--border-label 'Change directory' --preview 'ls -la {}' --preview-label 'Preview'"
+# Search history with Ctrl-H
+export FZF_CTRL_R_OPTS="--border-label 'History search'"
+
+# NVM - node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# Path for texlive
+export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
+export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
 
 # Theme
 ZSH_THEME="neo"
@@ -26,7 +58,7 @@ ZSH_THEME="neo"
 zstyle ':omz:update' mode disabled
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="true"
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -47,7 +79,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
 
 # History
-HISTSIZE=16192
+HISTSIZE=32384
 HISTFILE=~/.zsh_history
 HISTDUP=erase
 SAVEHIST=$HISTSIZE
@@ -62,8 +94,6 @@ setopt hist_find_no_dups
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -181,39 +211,6 @@ alias laf='la --only-files'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 
-export ANDROID_HOME=~/Android/Sdk
-export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-
-export PATH=/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:${PATH}:$JAVA_HOME/bin:/usr/local/protobuf/bin
-export MANPATH=${MANPATH}:/usr/local/man
-export FPATH=${FPATH}:~/.zfunc
-
-export TMUXP_CONFIGDIR="~/.tmux/tmuxp"
-
-# FZF options
-export FZF_COMPLETION_TRIGGER='**'
-# export FZF_DEFAULT_COMMAND='fd --hidden --ignore-case --absolute-path --follow --full-path --exclude .git --exclude node_modules --exclude .venv --exclude venv'
-export FZF_DEFAULT_COMMAND='fd --hidden --ignore-case --exclude .git --exclude node_modules --exclude .venv --exclude venv . .'
-export FZF_DEFAULT_OPTS='--cycle --keep-right --scroll-off 20 --height ~100% --layout reverse --border rounded --border-label-pos top --info inline-right --marker "m"'
-# Find files with Ctrl-R
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type file"
-export FZF_CTRL_T_OPTS="--border-label 'Find files' --preview 'bat --color=always --style=numbers --line-range=:1000 {}' --preview-label 'Preview'"
-# Change directory with Ctrl-O
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type directory"
-export FZF_ALT_C_OPTS="--border-label 'Change directory' --preview 'ls -la {}' --preview-label 'Preview'"
-# Search history with Ctrl-H
-export FZF_CTRL_R_OPTS="--border-label 'History search'"
-
-# NVM - node version manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Path for texlive
-export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
-export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
-export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
-
 # Deno
 if [ -d "$HOME/.deno" ]; then
   source "/home/hieucien/.deno/env"
@@ -224,10 +221,12 @@ if [[ ":$FPATH:" != *":/home/hieucien/completions:"* ]]; then
   export FPATH="/home/hieucien/completions:$FPATH";
 fi
 
+# Add zoxide
 if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init zsh)"
 fi
 
+# Add fzf
 if [ -f ~/.fzf.zsh ]; then
 	source ~/.fzf.zsh
 fi
@@ -237,6 +236,7 @@ if command -v pipx &>/dev/null; then
 	eval "$(register-python-argcomplete pipx)"
 fi
 
+# Default editor
 if command -v nvim &>/dev/null; then
 	export EDITOR='nvim'
 else
@@ -244,13 +244,19 @@ else
 fi
 
 # Setting for zsh-vim-mode
-
 if command -v nvim &>/dev/null; then
 	export ZVM_VI_EDITOR='nvim'
 else
   export ZVM_VI_EDITOR='vi'
 fi
 export ZVM_VI_SURROUND_BINDKEY='classic'
+
+# Setting Man pager instead of less
+if command -v nvim &>/dev/null; then
+  export MANPAGER='nvim +Man!'
+else
+  export MANPAGER='vi +Man!'
+fi
 
 # Completion for ansible
 if command -v ansible &>/dev/null; then
