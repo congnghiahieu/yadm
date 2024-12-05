@@ -9,9 +9,14 @@ elif [[ $CURRENT_SHELL == *fish* ]]; then
   SHELL_FILE="$HOME/.config/fish/config.fish"
 fi
 
+# Required
+
 function install_essentials {
   sudo apt update -y
-  sudo apt install coreutils build-essential curl wget git unzip vim tree locate at stow nmap wl-clipboard xclip -y
+  sudo apt install coreutils build-essential
+  \ curl wget git unzip vim at
+  \ wl-clipboard xclip
+  \ nmap net-tools traceroute -y
 }
 install_essentials
 
@@ -42,16 +47,6 @@ function install_node {
 }
 install_node
 
-function install_deno {
-  sudo apt update -y
-  if command -v deno &>/dev/null; then
-    echo "Deno $(deno --version) is already installed"
-  else
-    curl -fsSL https://deno.land/install.sh | sh
-  fi
-}
-install_deno
-
 function install_dotnet {
   sudo apt remove dotnet* aspnetcore* netstandard* -y
   sudo mkdir -p /etc/apt/preferences.d
@@ -67,18 +62,34 @@ EOF
 }
 install_dotnet
 
-function install_rust {
-  if command -v cargo &>/dev/null; then
-    echo "Rust $(cargo --version) is already installed"
-    return
-  fi
-
+function install_java {
   sudo apt update -y
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $SHELL_FILE
-  rustup update
+  sudo apt install openjdk-21-jdk openjdk-21-jre openjdk-21-dbg openjdk-21-doc openjdk-21-source openjdk-21-testsupport -y
+  # echo 'export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))' >>$SHELL_FILE
 }
-install_rust
+install_java
+
+function install_maven {
+  cd /tmp
+  curl -LO https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+  sudo tar -C /usr/local/ -xzvf apache-maven-3.9.9-bin.tar.gz
+  sudo mv /usr/local/apache-maven-3.9.9 /usr/local/apache-maven
+
+  # sudo apt update -y
+  # sudo apt install maven -y
+}
+install_maven
+
+function install_gradle {
+  cd /tmp
+  curl -LO https://services.gradle.org/distributions/gradle-8.11.1-bin.zip
+  sudo unzip gradle-8.11.1-bin.zip -d /usr/local/
+  sudo mv /usr/local/gradle-8.11.1 /usr/local/gradle
+
+  # sudo apt update -y
+  # sudo apt install gradle -y
+}
+install_gradle
 
 function install_go {
   if command -v go &>/dev/null; then
@@ -96,23 +107,31 @@ function install_go {
 }
 install_go
 
-function install_java {
-  sudo apt update -y
-  sudo apt install openjdk-21-jdk openjdk-21-jre openjdk-21-dbg openjdk-21-doc openjdk-21-source openjdk-21-testsupport -y
-  echo 'export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))' >>$SHELL_FILE
-}
-install_java
+function install_rust {
+  if command -v cargo &>/dev/null; then
+    echo "Rust $(cargo --version) is already installed"
+    return
+  fi
 
-function install_maven {
-  cd /tmp
-  curl -LO https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
-  sudo tar -C /usr/local/ -xzvf apache-maven-3.9.9-bin.tar.gz
-  sudo mv /usr/local/apache-maven-3.9.9 /usr/local/apache-maven
+  sudo apt update -y
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $SHELL_FILE
+  rustup update
 }
-install_maven
+install_rust
+
+# Optional
 
 function install_scala {
   cd /tmp
   curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d >cs && chmod +x cs && ./cs setup
 }
-install_scala
+
+function install_deno {
+  sudo apt update -y
+  if command -v deno &>/dev/null; then
+    echo "Deno $(deno --version) is already installed"
+  else
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
+}

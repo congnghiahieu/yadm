@@ -100,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Alias for python
 alias python="python3"
+alias py="python3"
 alias pav='source ./venv/bin/activate'
 alias pcv='python3 -m venv venv'
 alias pdv='deactivate'
@@ -197,10 +198,6 @@ alias ait='ansible-inventory'
 alias apb='ansible-playbook'
 alias apl='ansible-pull'
 
-# Alias for cloudflare warp-cli
-alias warp-con='warp-cli connect'
-alias warp-dis='warp-cli disconnect'
-
 # Modern CLI tools
 alias l='eza --long --classify --color auto --color-scale size --color-scale-mode gradient --icons --sort name --group --time modified --no-git --time-style "+%Y-%m-%d %H:%M"'
 alias ld='l --only-dirs'
@@ -257,6 +254,9 @@ if command -v nvim &>/dev/null; then
 else
   export MANPAGER='vi +Man!'
 fi
+
+# Sudo editor
+export SUDO_EDITOR='vi'
 
 # Completion for ansible
 if command -v ansible &>/dev/null; then

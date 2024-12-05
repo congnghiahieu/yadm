@@ -20,20 +20,21 @@ git clone https://github.com/congnghiahieu/obsidian
 
 ## Required
 
+- Edge
 - VSCode
 - Obsidian
 - WPS
-- Edge
 - Teamviewer
 - AnyDesk
-- JetBrain, JetBrain Nerd Font
+- JetBrain Font, JetBrain Nerd Font
+- VLC
+- CloudFlare Warp
+- Elisa
 
 ## Optional
 
 - OBS
-- Elisa
 - balenaEtcher
-- CloudFlare Warp
 - Postman
 - MSTeam
 - Android Studio
