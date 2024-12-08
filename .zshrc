@@ -79,7 +79,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
 
 # History
-HISTSIZE=32384
+HISTSIZE=64768
 HISTFILE=~/.zsh_history
 HISTDUP=erase
 SAVEHIST=$HISTSIZE
