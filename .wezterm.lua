@@ -4,8 +4,9 @@ local config = wezterm.config_builder()
 -- config.default_prog = { "tmux" }
 
 -- Color scheme
-config.color_scheme = "Ayu Mirage"
--- config.color_scheme = "OneDark (base16)"
+-- config.color_scheme = "Ayu Mirage"
+-- config.color_scheme = "3024 (base16)"
+config.color_scheme = "GitHub Dark"
 
 -- Font
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")

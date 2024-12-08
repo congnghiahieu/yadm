@@ -31,5 +31,6 @@ filetype on
 syntax on 
 
 set termguicolors     " enable true colors support
-let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark" " for mirage version of theme
 colorscheme ayu

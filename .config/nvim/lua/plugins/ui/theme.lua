@@ -14,7 +14,8 @@ return {
 				mirage = true,
 				terminal = false,
 			})
-			vim.cmd.colorscheme("ayu-mirage")
+			-- vim.cmd.colorscheme("ayu-mirage")
+			vim.cmd.colorscheme("ayu-dark")
 		end,
 	},
 }
