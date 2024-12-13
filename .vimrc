@@ -28,7 +28,7 @@ set showcmd
 set showmode
 set wildmenu
 filetype on
-syntax on 
+syntax on
 
 set termguicolors     " enable true colors support
 " let ayucolor="mirage" " for mirage version of theme

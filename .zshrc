@@ -5,9 +5,19 @@ export TMUXP_CONFIGDIR="~/.tmux/tmuxp"
 export ANDROID_HOME=~/Android/Sdk
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 
-export PATH=/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:${PATH}:$JAVA_HOME/bin:/usr/local/protobuf/bin
-export MANPATH=${MANPATH}:/usr/local/man
-export FPATH=${FPATH}:~/.zfunc
+export PATH=$PATH:/usr/local/go/bin:~/go/bin:/usr/local/lua/lua/bin:~/.local/share/coursier/bin:/usr/local/lua/luarocks/prod/bin:/usr/local/ffmpeg:~/.dotnet/tools:~/.local/bin:~/.local/share/nvim/mason/bin:/usr/local/nvim-linux64/bin:/usr/local/apache-maven/bin:/usr/local/gradle/bin:/usr/local/yazi:/usr/local/gh-cli/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$JAVA_HOME/bin:/usr/local/protobuf/bin
+export MANPATH=$MANPATH:/usr/local/man
+export FPATH=$FPATH:~/.zfunc
+
+# Path for texlive manually dowload
+export MANPATH=$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man
+export INFOPATH=$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info
+export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
+
+# Path for pacman -S textlive-full
+# export MANPATH=$MANPATH:/home/hieucien/.cache/paru/clone/texlive-full/pkg/texlive-full/opt/texlive/2024/texmf-dist/doc/man
+# export INFOPATH=$INFOPATH:/home/hieucien/.cache/paru/clone/texlive-full/pkg/texlive-full/opt/texlive/2024/texmf-dist/doc/info
+# export PATH=$PATH:/home/hieucien/.cache/paru/clone/texlive-full/pkg/texlive-full/opt/texlive/2024/bin/x86_64-linux
 
 # FZF options
 export FZF_COMPLETION_TRIGGER='**'
@@ -28,13 +38,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# Path for texlive
-export MANPATH="$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man"
-export INFOPATH="$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info"
-export PATH="$PATH:/usr/local/texlive/2024/bin/x86_64-linux"
+# pyenv set up
+export PYENV_ROOT="$HOME/.pyenv"
+if [[ -d $PYENV_ROOT/bin ]]; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
-# Theme
-ZSH_THEME="neo"
+# Starship prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+else
+  ZSH_THEME="neo"
+fi
 
 # Key bindings emacs
 # Ctrl + f: accept completion
@@ -99,8 +115,6 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Alias for python
-alias python="python3"
-alias py="python3"
 alias pav='source ./venv/bin/activate'
 alias pcv='python3 -m venv venv'
 alias pdv='deactivate'
@@ -157,23 +171,6 @@ alias docker-stop='sudo systemctl stop docker && sudo systemctl stop docker.sock
 alias docker-enable='sudo systemctl enable docker'
 alias docker-disable='sudo systemctl disable docker'
 
-# Alias for mysql
-alias mysql-status='sudo systemctl status mysql.service'
-alias mysql-start='sudo systemctl start mysql.service'
-alias mysql-stop='sudo systemctl stop mysql.service'
-alias mysql-enable='sudo systemctl enable mysql.service'
-alias mysql-disable='sudo systemctl disable mysql.service'
-alias mysql-wb='mysql-workbench'
-
-# Alias for mongodb
-alias mongodb-status='sudo systemctl status mongod.service'
-alias mongodb-start='sudo systemctl start mongod.service'
-alias mongodb-stop='sudo systemctl stop mongod.service'
-alias mongodb-enable='sudo systemctl enable mongod.service'
-alias mongodb-disable='sudo systemctl disable mongod.service'
-alias mongodb-cp='mongodb-compass'
-alias mongodb-sh='mongosh'
-
 # Alias for tmux
 alias t='tmux'
 alias ta='tmux attach -t'
@@ -186,7 +183,6 @@ alias e='exit'
 alias p='nvim ~/.zshrc'
 alias sp='. ~/.zshrc'
 alias nv='nvim'
-
 
 # Alias for ansible
 alias a='ansible'
@@ -270,4 +266,3 @@ if command -v ansible &>/dev/null; then
 	eval $(register-python-argcomplete ansible-pull)
 	eval $(register-python-argcomplete ansible-vault)
 fi
-
