@@ -178,11 +178,13 @@ alias tk='tmux kill-session -t'
 alias tp='tmuxp'
 
 # Alias for cli
-alias c='clear'
-alias e='exit'
-alias p='nvim ~/.zshrc'
-alias sp='. ~/.zshrc'
 alias nv='nvim'
+alias vi='vim'
+if command -v nvim &>/dev/null; then
+  alias profile='nvim ~/.zshrc'
+else
+  alias profile='vi ~/.zshrc'
+fi
 
 # Alias for ansible
 alias a='ansible'
@@ -253,6 +255,16 @@ fi
 
 # Sudo editor
 export SUDO_EDITOR='vi'
+
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # Completion for ansible
 if command -v ansible &>/dev/null; then
