@@ -104,8 +104,9 @@ function install_apps {
 	sudo systemctl start libvirtd.service
 
 	paru -S lazygit lazydocker \
-		cloudflare-warp-bin \
+		microsoft-edge-stable-bin \
 		visual-studio-code-bin \
+		cloudflare-warp-bin \
 		wezterm-git
 	sudo chown -R $(whoami):$(whoami) /opt/visual-studio-code/
 	sudo chown $(whoami):$(whoami) /usr/bin/code
@@ -168,4 +169,5 @@ function install_texlive {
 	cd /tmp && wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 	TAR_DIR=$(tar -xzvf install-tl-unx.tar.gz | head -n 1 | cut -f1 -d"/")
 	cd "$TAR_DIR" && sudo perl ./install-tl --paper=letter --scheme=full --no-doc-install --no-src-install --no-interaction
+	sudo chown -R -R $(whoami):$(whoami) /usr/local/texlive/
 }
