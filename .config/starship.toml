@@ -8,6 +8,12 @@ $os\
 $directory\
 $git_branch\
 $git_status\
+$nodejs\
+$python\
+$java\
+$dotnet\
+$rust\
+$golang\
 $line_break\
 $character\
 """
@@ -18,14 +24,8 @@ $character\
 # $username\
 # $hostname\
 # $package\
-# $nodejs\
 # $deno\
 # $bun\
-# $python\
-# $java\
-# $dotnet\
-# $rust\
-# $golang\
 # $kubernetes\
 # $terraform\
 # $pulumi\
@@ -100,7 +100,7 @@ format = "[$branch]($style)"
 style = "purple bold"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218)($ahead_behind$stashed)]($style) "
 style = "bold white"
 conflicted = "​"
 untracked = "​"

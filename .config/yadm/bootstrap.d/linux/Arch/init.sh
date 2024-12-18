@@ -1,5 +1,7 @@
 #! /bin/env bash
 
+# https://stackoverflow.com/questions/59446321/removing-package-group-except-some-packages
+
 SHELL_FILE="$HOME/.bashrc"
 CURRENT_SHELL=$(echo "$SHELL")
 
@@ -28,7 +30,8 @@ function install_node {
 	fi
 }
 
-function install_essentials {
+function install_binaries {
+	sudo pacman -Syu
 	sudo pacman -S flatpak sof-firmware amd-ucode intel-ucode
 	sudo pacman -S --needed base-devel
 
@@ -42,7 +45,6 @@ function install_essentials {
 		wl-clipboard xclip \
 		nmap traceroute net-tools inetutils ufw \
 		at cronie
-	sudo ln -s /usr/bin/vim /usr/bin/vi
 	sudo systemctl enable --now cronie.service
 
 	sudo pacman -S \
@@ -70,12 +72,6 @@ function install_apps {
 
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-	ya pack -a kmlupreti/ayu-dark
-	ya pack -a yazi-rs/flavors:catppuccin-mocha
-	ya pack -a yazi-rs/flavors:catppuccin-macchiato
-	ya pack -a dangooddd/kanagawa
-	git clone https://github.com/BennyOe/onedark.yazi.git ~/.config/yazi/flavors/onedark.yazi
-
 	tldr --update
 
 	pipx install --include-deps ansible
@@ -84,18 +80,16 @@ function install_apps {
 	pipx install hatch
 	pipx install poetry
 
-	zsh --version
-	chsh -s $(which zsh)
-
 	sudo pacman -S obsidian \
-		ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
-		kde-graphics vlc okular elisa libreoffice-still \
-		docker docker-buildx docker-compose
+		ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common ttf-nerd-fonts-symbols-mono \
+		kde-graphics kde-multimedia kde-network kde-system kde-utilities \
+		vlc libreoffice-fresh
 
-	sudo systemctl start docker.service
-	sudo systemctl start docker.socket
+	sudo pacm -S docker docker-buildx docker-compose
 	sudo systemctl enable docker.service
+	sudo systemctl start docker.service
 	sudo systemctl enable docker.socket
+	sudo systemctl start docker.socket
 	sudo groupadd docker
 	sudo usermod -aG docker "$USER"
 
@@ -112,10 +106,12 @@ function install_apps {
 	paru -S lazygit lazydocker \
 		cloudflare-warp-bin \
 		visual-studio-code-bin \
-		ttf-nerd-fonts-symbols-mono wezterm-git
-
+		wezterm-git
 	sudo chown -R $(whoami):$(whoami) /opt/visual-studio-code/
 	sudo chown $(whoami):$(whoami) /usr/bin/code
+
+	zsh --version
+	chsh -s $(which zsh)
 }
 
 function install_ohmyzsh {
@@ -145,16 +141,24 @@ function install_ohmyzsh {
 
 # Optional
 
-function install_scala {
-	cd /tmp && curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup
-}
-
 function install_deno {
 	if command -v deno &> /dev/null; then
 		echo "Deno $(deno --version) is already installed"
 	else
 		curl -fsSL https://deno.land/install.sh | sh
 	fi
+}
+
+function install_bun {
+	if command -v bun &> /dev/null; then
+		echo "Bun $(bun --version) is already installed"
+	else
+		curl -fsSL https://bun.sh/install | bash
+	fi
+}
+
+function install_scala {
+	cd /tmp && curl -fL https://github.com/coursier/coursier/releases/latest/download/cs-x86_64-pc-linux.gz | gzip -d > cs && chmod +x cs && ./cs setup
 }
 
 function install_texlive {

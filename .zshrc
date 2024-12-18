@@ -187,7 +187,7 @@ else
 fi
 
 # Alias for ansible
-alias a='ansible'
+alias ans='ansible'
 alias acf='ansible-config'
 alias acs='ansible-console'
 alias adc='ansible-doc'
